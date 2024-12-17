@@ -17,7 +17,7 @@ The system consists of several clients (peers) and a central server. A peer can 
 ## Download and Compile
 ``` 
 git clone https://github.com/ltttom/MMT_N5_D14.git
-cd P2P_File_Sharing.git
+cd MMT_N5_D14
 make
 ```
 
@@ -26,10 +26,9 @@ Server:
 ``` 
 ./server 
 ```
-Client:
 ``` 
-# To start the client
-./peer 
+# To start the peer
+./peers 
 
 # Get list of files that can be downloaded
 show
