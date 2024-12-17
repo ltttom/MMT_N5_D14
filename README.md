@@ -16,7 +16,7 @@ The system consists of several clients (peers) and a central server. A peer can 
 
 ## Download and Compile
 ``` 
-git clone https://github.com/bchu7796/P2P_File_Sharing.git
+git clone https://github.com/ltttom/MMT_N5_D14.git
 cd P2P_File_Sharing.git
 make
 ```
