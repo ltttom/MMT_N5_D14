@@ -1,0 +1,66 @@
+Peer Address : 127.0.0.1:18001
+Tracker 1 Address : 127.0.0.1:5000
+Tracker 2 Address : 127.0.0.1:6000
+Log file name : 127.0.0.1:18001_log.txt
+
+Peer socket created
+connected to server 5000
+
+18001 will start running as server
+ Server socket created.
+ Binding completed.
+Listening...
+
+sent to server: create_user
+primary server response: Account created
+sent to server: login
+primary server response: Login Successful
+sent to server: join_group
+primary server response: Group request sent
+sent to server: list_requests
+primary server response: Fetching group requests...
+waiting for response
+sent to server: list_files
+primary server response: Fetching files...
+sent to server: download_file
+primary server response: Downloading..
+sending file details for download : a.txt$$/home/ltttom$$999
+Started piecewise algo
+Getting chunk info of : a.txt from 127.0.0.1:18000
+
+Inside connectToPeer
+Socket Created
+
+ needs to connect to 127.0.0.1:18000
+Connected to peer 127.0.0.1:18000
+current command get_chunk_vector
+sent command to peer: get_chunk_vector$$a.txt
+got reply: 11
+filled in default values to file
+getting segment no: 0
+randompiece = 0
+starting thread for chunk number 0
+Chunk fetching details :a.txt 127.0.0.1:18000 0
+
+Inside connectToPeer
+Socket Created
+
+ needs to connect to 127.0.0.1:18000
+Connected to peer 127.0.0.1:18000
+current command get_chunk
+sent command to peer: get_chunk$$a.txt$$0$$/home/ltttom/a.txt
+
+getting chunk 0 from 18000
+written at: 0
+written till: 11
+
+chunk vector updated for a.txt at 0
+
+Inside connectToPeer
+Socket Created
+
+ needs to connect to 127.0.0.1:18000
+Connected to peer 127.0.0.1:18000
+current command get_file_path
+server reply for get file path:/home/ltttom/temp/Peer-to-Peer-Group-Based-File-Sharing-System/client/a.txt
+terminating connection with 127.0.0.1:18000

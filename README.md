@@ -1,42 +1,181 @@
-# P2P File Sharing System
+# Bit Torrent : Peer-to-Peer Group Based File Sharing System
 
-## System Description
+- The Mini-torrent project is basically a peer-to-peer file sharing network. The user
+has functionalities like sharing a file, downloading a file, removing a file from
+sharing etc. It is basically like the Bit-Torrent we have on the internet.
+- The architecture is such that there are multiple clients(users) and a tracker which stores the
+metadata of which all users have a file, basically a file-user mapping.
 
-The system consists of several clients (peers) and a central server. A peer can join the p2p network by connecting to the server. After entering the network, a peer can either register the file that it wants to share or download the file from other peers. The data being distributed are split into chunks. For each file, the server keeps track of the list of chunks each peer has. Any peer can download files from other peers directly. Moreover, any peer is capable of downloading different chunks of a file simultaneously from different peers. 
+  ![image](https://user-images.githubusercontent.com/48115585/139272264-5951ea87-0a67-4f53-a49a-c6003274e550.png)
 
-## Protocol
 
-| Request  | Reply  |
-|---|---|
-|Register Request: Tells the server what files the peer wants to share with the network. |Register Reply: For each file, it advises if the file registration was a success |
-|  File List Request: Asks the server for the list of files. |  File List Reply: Includes the number of files in the list; and for each file, a file name and a file length. |
-| File Locations Request: Asks the server for the IP endpoints of the peers containing the requested file  | File Locations Reply: Includes number of endpoints; then for each endpoint, chunks of the file it has, an IP address and port .  |
-| Chunk Register Request: Tells the server when a peer receives a new chunk of the file and becomes a source (of that chunk) for other peers.  | Chunk Register Reply: Advises if the chunk registration was a success.|
-| File Chunk Request: Asks the peer to return the file chunk. Reads in a file name, chunk indicator.  | File Chunk Reply: A stream of bytes representing the requested chunk. |
+## Prerequisites
 
-## Download and Compile
-``` 
-git clone https://github.com/ltttom/MMT_N5_D14.git
-cd MMT_N5_D14
-make
-```
+**Software Requirement**
 
-## Execution
-Server:
-``` 
-./server 
-```
-``` 
-# To start the peer
-./peers 
+1. G++ compiler
+   - **To install G++ :** `sudo apt-get install g++`
+2. OpenSSL library
 
-# Get list of files that can be downloaded
-show
+   - **To install OpenSSL library :** `sudo apt-get install openssl`
 
-# Share files
-share filenums file1, file2, ...
+**Platform:** Linux <br/>
 
-# Download file
-download filename
+## Installation
 
 ```
+1. cd client
+2. make
+3. cd ../tracker
+5. make
+6. cd ..
+```
+
+## Usage
+
+### Tracker
+
+1. Run Tracker:
+
+```
+cd tracker
+./tracker​ <TRACKER INFO FILE> <TRACKER NUMBER>
+ex: ./tracker tracker_info.txt 1
+```
+
+`<TRACKER INFO FILE>` contains the IP, Port details of all the trackers.
+
+```
+Ex:
+127.0.0.1
+5000
+127.0.0.1
+6000
+```
+
+2. Close Tracker:
+
+```
+quit
+```
+
+### Client:
+
+1. Run Client:
+
+```
+cd client
+./client​ <IP>:<PORT> <TRACKER INFO FILE>
+ex: ./client 127.0.0.1:18000 tracker_info.txt
+```
+
+2. Create user account:
+
+```
+create_user​ <user_id> <password>
+```
+
+3. Login:
+
+```
+login​ <user_id> <password>
+```
+
+4. Create Group:
+
+```
+create_group​ <group_id>
+```
+
+5. Join Group:
+
+```
+join_group​ <group_id>
+```
+
+6. Leave Group:
+
+```
+leave_group​ <group_id>
+```
+
+7. List pending requests:
+
+```
+list_requests ​<group_id>
+```
+
+8. Accept Group Joining Request:
+
+```
+accept_request​ <group_id> <user_id>
+```
+
+9. List All Group In Network:
+
+```
+list_groups
+```
+
+10. List All sharable Files In Group:
+
+```
+list_files​ <group_id>
+```
+
+11. Upload File:
+
+```
+​upload_file​ <file_path> <group_id​>
+```
+
+12. Download File:​
+
+```
+download_file​ <group_id> <file_name> <destination_path>
+```
+
+13. Logout:​
+
+```
+logout
+```
+
+14. Show_downloads: ​
+
+```
+show_downloads
+```
+
+15. Stop sharing: ​
+
+```
+stop_share ​<group_id> <file_name>
+```
+
+## Working
+
+1. User should create an account and register with tracker.
+2. Login using the user credentials.
+3. Tracker maintains information of clients with their files(shared by client) to assist the clients for the communication between peers.
+4. User can create Group and hence will become admin of that group.
+5. User can fetch list of all Groups in server.
+6. User can join/leave group.
+7. Group admin can accept group join requests.
+8. Share file across group: Shares the filename and SHA1 hash of the complete file as well as piecewise SHA1 with the tracker.
+9. Fetch list of all sharable files in a Group.
+10. Download:
+    1. Retrieve peer information from tracker for the file.
+    2. Download file from multiple peers (different pieces of file from different peers - ​piece selection algorithm​) simultaneously and all the files which client downloads will be shareable to other users in the same group. File integrity is ensured using SHA1 comparison.
+11. Piece selection algorithm used: Selects random piece and then downloads it from a random peer having that piece.
+12. Show downloads.
+13. Stop sharing file.
+14. Logout - stops sharing all files.
+15. Whenever client logins, all previously shared files before logout should automatically be on sharing mode.
+
+## Assumptions
+
+1. Only one tracker is implemented and that tracker should always be online.
+2. The peer can login from different IP addresses, but the details of his downloads/uploads will not be persistent across sessions.
+3. SHA1 integrity checking doesn't work correctly for binary files, even though in most likelihood the file would have downloaded correctly.
+4. File paths should be absolute.

@@ -1,0 +1,71 @@
+Peer Address : 127.0.0.1:18000
+Tracker 1 Address : 127.0.0.1:5000
+Tracker 2 Address : 127.0.0.1:6000
+Log file name : 127.0.0.1:18000_log.txt
+
+Peer socket created
+connected to server 5000
+
+18000 will start running as server
+ Server socket created.
+ Binding completed.
+Listening...
+
+sent to server: create_user
+primary server response: Account created
+sent to server: login
+primary server response: Login Successful
+sent to server: create_group
+primary server response: Group created
+sent to server: join_group
+primary server response: You are already in this group
+sent to server: list_request
+primary server response: Invalid command
+sent to server: list_request
+primary server response: Invalid command
+sent to server: list_requests
+primary server response: Fetching group requests...
+waiting for response
+sent to server: upload_file
+primary server response: Error 103:
+sent to server: upload_file
+primary server response: Uploading...
+sending file details for upload: /home/ltttom/temp/Peer-to-Peer-Group-Based-File-Sharing-System/client/a.txt$$127.0.0.1:18000$$13$$b4f87a2ed788441d4cfce91c17d5426bbdf8c4aafb7ae828520aaf7a5dde27ba$$be019d9cdaa632b07b27e0b5dcc700cab1c5f2c9
+server reply for send file: Uploaded
+sent to server: list_requests
+primary server response: Invalid argument count
+sent to server: list_requests
+primary server response: Fetching group requests...
+waiting for response
+request list: tuan$$
+list request response size: 2
+sent to server: accept_request
+primary server response: Accepting request...
+ Connection Accepted
+
+client socket num: 5
+
+client request at server get_chunk_vector$$a.txt
+get_chunk_vector
+
+sending chunk vector..
+sent: 11
+ Connection Accepted
+
+client socket num: 6
+
+client request at server get_chunk$$a.txt$$0$$/home/ltttom/a.txt
+get_chunk
+
+sending chunk...
+filepath: /home/ltttom/temp/Peer-to-Peer-Group-Based-File-Sharing-System/client/a.txt
+sending 0 from 127.0.0.1:18000
+sending data starting at 0
+sent till -1
+ Connection Accepted
+
+client socket num: 5
+
+client request at server get_file_path$$a.txt
+get_file_path
+command from peer client: get_file_path$$a.txt
